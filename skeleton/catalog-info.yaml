@@ -1,0 +1,74 @@
+apiVersion: backstage.io/v1alpha1
+kind: Component
+metadata:
+  name: ${{ values.identifier }}
+  description: ${{ values.description | dump }}
+  annotations:
+    gitlab.com/project-slug: ${{ values.owner + "/" + values.repo }}
+    backstage.io/techdocs-ref: dir:.
+  links:
+    - url: ${{ "https://s3.console.aws.amazon.com/s3/buckets/" + values.bucket + "/" + values.folder }}
+      title: S3 Directory
+      icon: cloud
+  tags:
+    - outputport
+    - aws
+    - cdp
+    - s3
+spec:
+  type: outputport
+  lifecycle: experimental
+  owner: ${{ values.developmentGroup }}
+  system: ${{ values.dataproduct | dump }}
+  domain: ${{ values.domain | dump }}
+  mesh:
+    name: ${{ values.name | dump }}
+    fullyQualifiedName: ${{ values.fullyQualifiedName | dump}}
+    description: ${{ values.description | dump}}
+    kind: outputport
+    version: ${{ values.identifier.split(".")[2] + ".0.0" }}
+    infrastructureTemplateId: ${{ values.infrastructureTemplateId }}
+    useCaseTemplateId: ${{ values.useCaseTemplateId }}
+    dependsOn: {% if values.dependsOn | length > 0 %}{% for i in values.dependsOn %}
+      - ${{ i }}{% endfor %}{% else %}[]{% endif %}
+    platform: CDP on AWS
+    technology: S3
+    outputPortType: Files
+    creationDate: ${{ values.creationDate }}
+    startDate: ${{ values.creationDate }}
+    processDescription: ${{ values.processDescription | dump }}
+    dataContract:
+      schema: {% if values.schemaColumns | length > 0 %}{% for column in values.schemaColumns %}
+        - name: ${{ column.name }}
+          dataType: ${{ column.dataType }}
+          description: ${{ column.description }}
+        {% if column.dataLength %}
+          dataLength: ${{ column.dataLength }}
+        {% endif %}
+        {% if column.dataTypeDisplay %}
+          dataTypeDisplay: ${{ column.dataTypeDisplay }}
+        {% endif %}
+        {% if column.arrayDataType %}
+          arrayDataType: ${{ column.arrayDataType }}
+        {% endif %}{% endfor %}{% else %}[]{% endif %}
+      termsAndConditions: ${{ values.termsAndConditions | dump }}
+      endpoint: ${{ values.endpoint | dump }}
+      SLA:
+        intervalOfChange: ${{ values.intervalOfChange }}
+        timeliness: ${{ values.timeliness }}
+        upTime: ${{ values.upTime }}
+    dataSharingAgreements:
+      purpose: ${{ values.purpose | dump }}
+      billing: ${{ values.billing | dump }}
+      security: ${{ values.security | dump }}
+      intendedUsage: ${{ values.intendedUsage | dump }}
+      limitations: ${{ values.limitations | dump }}
+      lifeCycle: ${{ values.lifeCycle | dump }}
+      confidentiality: ${{ values.confidentiality | dump }}
+    tags: []
+    sampleData: {}
+    semanticLinking: []
+    specific:
+      cdpEnvironment: ${{ values.cdpEnvironment }}
+      bucket: ${{ values.bucket }}
+      folder: ${{ values.folder }}
