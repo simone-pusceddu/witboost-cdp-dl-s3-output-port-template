@@ -97,4 +97,4 @@ This section includes information about the location of the deployed data used b
 
 ## After creation
 
-In order to customize the component information, access the component repository and update the `spec.mesh` section inside the `catalog-info.yaml` according to the [Data Product specification](https://github.com/agile-lab-dev/Data-Product-Specification) and to the `CDP S3 Specific Provisioner contract`.
+In order to customize the component information, access the component repository and update the `spec.mesh` section inside the `catalog-info.yaml` according to the [Data Product specification](https://github.com/agile-lab-dev/Data-Product-Specification) and to the `CDP S3 Tech Adapter contract`.

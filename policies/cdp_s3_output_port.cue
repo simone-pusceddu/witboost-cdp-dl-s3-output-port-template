@@ -1,42 +1,43 @@
-name:                     string
-fullyQualifiedName?:      null | string
-description:              string
-kind:                     "outputport"
-version:                  string & =~"^[0-9]+\\.[0-9]+\\..+$"
-infrastructureTemplateId: string
-useCaseTemplateId:        string
+name!:                     string
+fullyQualifiedName?:       null | string
+description!:              string
+kind!:                     "outputport"
+version!:                  string & =~"^[0-9]+\\.[0-9]+\\..+$"
+infrastructureTemplateId!: string
+useCaseTemplateId!:        string
 dependsOn: [...string]
-platform:             "CDP on AWS"
-technology:           "S3"
-outputPortType:       "Files"
+platform!:            "CDP on AWS"
+technology!:          "S3"
+outputPortType!:      "Files"
 dataContract:         #DataContract
 dataSharingAgreement: #DataSharingAgreement
 tags: [...#OM_Tag]
 specific: {
-	cdpEnvironment: string
-	bucket:         string
-	folder:         string
+	cdpEnvironment!: string
+	bucket!:         string
+	folder!:         string
 }
 
 #OM_DataType: string & =~"(?i)^(TINYINT|SMALLINT|INT|BIGINT|DOUBLE|DECIMAL|TIMESTAMP|DATE|STRING|CHAR|VARCHAR|BOOLEAN|ARRAY|MAP|STRUCT|UNION)$"
 #URL:         string & =~"^https?://[a-zA-Z0-9@:%._~#=&/?]*$"
 #OM_Tag: {
-	tagFQN:       string
+	tagFQN!:      string
 	description?: string | null
-	source:       string & =~"(?i)^(Tag|Glossary)$"
-	labelType:    string & =~"(?i)^(Manual|Propagated|Automated|Derived)$"
-	state:        string & =~"(?i)^(Suggested|Confirmed)$"
+	source!:      string & =~"(?i)^(Tag|Glossary)$"
+	labelType!:   string & =~"(?i)^(Manual|Propagated|Automated|Derived)$"
+	state!:       string & =~"(?i)^(Suggested|Confirmed)$"
 	href?:        string | null
+	...
 }
 
 #OM_Column: {
-	name:     string
+	name!:    string
 	dataType: #OM_DataType
 	if dataType =~ "(?i)^(ARRAY)$" {
-		arrayDataType: #OM_DataType
+		arrayDataType!: #OM_DataType
 	}
 	if dataType =~ "(?i)^(CHAR|VARCHAR|BINARY|VARBINARY)$" {
-		dataLength: number
+		dataLength!: number
 	}
 	dataTypeDisplay?:    string | null
 	description?:        string | null
@@ -45,6 +46,7 @@ specific: {
 	if dataType =~ "(?i)^(MAP|STRUCT|UNION)$" {
 		children: [... #OM_Column]
 	}
+	...
 }
 
 #DataContract: {
