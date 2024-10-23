@@ -31,10 +31,6 @@ spec:
           default: S3 CDP Output Port
           ui:options:
             allowArbitraryValues: true
-        fullyQualifiedName:
-          title: Fully Qualified Name
-          type: string
-          description: Output port fully qualified name
         description:
           title: Description
           type: string
@@ -87,7 +83,22 @@ spec:
             ui:options:
               allowArbitraryValues: false
           description: An Output Port could depend on other output ports or storage areas
-
+        domainName:
+          type: string
+          ui:field: EntitySelectionPicker
+          ui:fieldName: domain
+          ui:property: spec.mesh.name
+          ui:options:
+            allowArbitraryValues: false
+          ui:widget: hidden
+        dataproductName:
+          type: string
+          ui:field: EntitySelectionPicker
+          ui:fieldName: dataproduct
+          ui:property: spec.mesh.name
+          ui:options:
+            allowArbitraryValues: false
+          ui:widget: hidden
     - title: Provide some additional information
       properties:
         processDescription:
@@ -290,7 +301,8 @@ spec:
         targetPath: '.'
         values:
           name: '${{ parameters.name }}'
-          fullyQualifiedName: '${{ parameters.fullyQualifiedName }}'
+          domainName: '${{ parameters.domainName }}'
+          dataproductName: '${{ parameters.dataproductName }}'
           description: '${{ parameters.description }}'
           domain: '${{ parameters.domain }}'
           dataproduct: '${{ parameters.dataproduct }}'
