@@ -1,9 +1,8 @@
-%SKELETON
 apiVersion: scaffolder.backstage.io/v1beta3
 kind: Template
 metadata:
-  name: cdp-refresh-aws-outputport-s3-template.1
-  title: Output Port CDP-Refresh S3 Template
+  name: cdp-refresh-aws-outputport-s3-template-skeleton
+  title: Output Port CDP-Refresh S3 Template (Skeleton)
   description: Create a repository containing the definition of a CDP S3 Output Port
   mesh:
     icon: https://cdn2.iconfinder.com/data/icons/amazon-aws-stencils/100/Storage__Content_Delivery_Amazon_S3-512.png
@@ -331,7 +330,7 @@ spec:
           useCaseTemplateId: urn:dmb:utm:aws-cdp-outputport-s3-template:0.0.0
           infrastructureTemplateId: urn:dmb:itm:aws-cdp-outputport-s3-provisioner:0
           useCaseTemplateVersion: 0.0.0
-          destination: &destination 'gitlab.com?owner=AgileDMBSandbox%2F${{orgname}}%2Fmesh.repository%2F${{ parameters.domain | replace(r/domain:| |-/, "") }}%2F${{ parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}&repo=${{ parameters.name.split(" ") | join("") | lower }}'
+          destination: &destination 'gitlab.com?owner=simone.pusceddu&repo=${{ parameters.name.split(" ") | join("") | lower }}'
           displayName: '${{ parameters.displayName }}'
           owner: 'AgileDMBSandbox%2F${{orgname}}%2Fmesh.repository%2F${{ parameters.domain | replace(r/domain:| |-/, "") }}%2F${{ parameters.dataproduct.split(".")[1] | replace(r/ |-/g, "") }}'
           repo: '${{ parameters.name.split(" ") | join("") | lower }}'
